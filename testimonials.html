@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorHub — Testimonials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7ff;
+      color: #222;
+    }
+
+    nav {
+      background: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo { font-size: 1.4rem; font-weight: 700; color: #4f46e5; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 24px; }
+    .nav-links a { text-decoration: none; color: #555; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #4f46e5; font-weight: 600; }
+
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 50px;
+    }
+
+    .page-header h1 { font-size: 2.2rem; font-weight: 700; }
+    .page-header p { opacity: 0.85; margin-top: 8px; font-size: 0.95rem; }
+
+    /* Testimonials grid */
+    .testimonials-grid {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(79,70,229,0.12);
+    }
+
+    /* Big quote mark decoration */
+    .quote-mark {
+      font-size: 4rem;
+      color: #ede9fe;
+      font-family: Georgia, serif;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .testimonial-text {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    /* Star rating */
+    .stars {
+      color: #f59e0b;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .reviewer-info h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .reviewer-info p {
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    /* Slider section */
+    .slider-section {
+      max-width: 600px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .slider-section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .slider-section p {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .slider-card {
+      background: white;
+      border-radius: 14px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slider-text {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .slider-author {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .slider-btn {
+      padding: 8px 22px;
+      border: 2px solid #4f46e5;
+      background: transparent;
+      color: #4f46e5;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .slider-btn:hover {
+      background: #4f46e5;
+      color: white;
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.85rem;
+    }
+
+    footer a { color: #4f46e5; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="logo">🎨 CreatorHub</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="testimonials.html" class="active">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Testimonials</h1>
+    <p>What my teachers and friends say about me</p>
+  </div>
+
+  <!-- Testimonial Cards -->
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Priya is one of the most hardworking students I have taught. She always comes prepared and asks the right questions in class.</p>
+      <div class="stars">★★★★★</div>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #4f46e5;">SM</div>
+        <div class="reviewer-info">
+          <h4>Prof. Sharma</h4>
+          <p>Computer Science Faculty</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">She helped me understand pointers in C when I was completely lost. She explains things in a very simple and friendly way!</p>
+      <div class="stars">★★★★★</div>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #7c3aed;">RK</div>
+        <div class="reviewer-info">
+          <h4>Rohan Kumar</h4>
+          <p>Classmate, B.Tech CSE</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">The website she built for our class project looked amazing. I couldn't believe she did it with just basic HTML and CSS!</p>
+      <div class="stars">★★★★☆</div>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #059669;">NP</div>
+        <div class="reviewer-info">
+          <h4>Neha Patel</h4>
+          <p>Study Partner</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <p class="testimonial-text">Very responsible and creative student. Priya always submits her assignments on time and puts in extra effort to make them stand out.</p>
+      <div class="stars">★★★★★</div>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #dc2626;">MV</div>
+        <div class="reviewer-info">
+          <h4>Prof. Mehta</h4>
+          <p>Mathematics Faculty</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Testimonial Slider -->
+  <div class="slider-section">
+    <h2>Quick Quotes</h2>
+    <p>Click the buttons to see what others are saying</p>
+
+    <div class="slider-card">
+      <div class="slider-text" id="sliderText">"Always curious, always learning. A joy to have in class."</div>
+      <div class="slider-author" id="sliderAuthor">— Prof. Joshi, Physics</div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="changeSlide(-1)">← Previous</button>
+      <button class="slider-btn" onclick="changeSlide(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CreatorHub &nbsp;|&nbsp; <a href="contact.html">Leave a Review</a></p>
+  </footer>
+
+  <!-- JavaScript for the simple testimonial slider -->
+  <script>
+    // Array (list) of quotes for the slider
+    var quotes = [
+      { text: '"Always curious, always learning. A joy to have in class."', author: '— Prof. Joshi, Physics' },
+      { text: '"She helped our whole group understand how git works. Very patient!"', author: '— Amit Shah, Senior Student' },
+      { text: '"Great at explaining difficult coding concepts in simple language."', author: '— Divya Mehta, Classmate' },
+      { text: '"One of the few students who actually reads extra books on her own."', author: '— Prof. Rao, Programming Lab' },
+    ];
+
+    // Track which quote is currently showing (starts at 0)
+    var currentIndex = 0;
+
+    // This function changes the slide forward (+1) or backward (-1)
+    function changeSlide(direction) {
+      // Move the index by the direction value
+      currentIndex = currentIndex + direction;
+
+      // If we go past the last item, go back to the first
+      if (currentIndex >= quotes.length) {
+        currentIndex = 0;
+      }
+
+      // If we go before the first item, jump to the last
+      if (currentIndex < 0) {
+        currentIndex = quotes.length - 1;
+      }
+
+      // Update the text on the page
+      document.getElementById('sliderText').textContent   = quotes[currentIndex].text;
+      document.getElementById('sliderAuthor').textContent = quotes[currentIndex].author;
+    }
+  </script>
+
+</body>
+</html>

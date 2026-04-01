@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorHub — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7ff;
+      color: #222;
+    }
+
+    nav {
+      background: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .nav-links { list-style: none; display: flex; gap: 24px; }
+    .nav-links a { text-decoration: none; color: #555; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #4f46e5; font-weight: 600; }
+
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 50px;
+    }
+
+    .page-header h1 { font-size: 2.2rem; font-weight: 700; }
+    .page-header p { opacity: 0.85; margin-top: 8px; font-size: 0.95rem; }
+
+    /* Filter Buttons */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 36px 20px 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 2px solid #4f46e5;
+      background: transparent;
+      color: #4f46e5;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: #4f46e5;
+      color: white;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      max-width: 1000px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(79,70,229,0.15);
+    }
+
+    /* Coloured banner at top of card */
+    .card-banner {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: #ede9fe;
+      color: #4f46e5;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .card-body p {
+      font-size: 0.85rem;
+      color: #777;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-link {
+      display: inline-block;
+      padding: 8px 18px;
+      background: #4f46e5;
+      color: white;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .card-link:hover { background: #3730a3; }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.85rem;
+    }
+
+    footer a { color: #4f46e5; text-decoration: none; }
+
+    /* Hide a card when it doesn't match the filter */
+    .project-card.hidden { display: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="logo">🎨 CreatorHub</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>My Portfolio</h1>
+    <p>Projects I've built as a first year student</p>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('web', this)">Web</button>
+    <button class="filter-btn" onclick="filterProjects('python', this)">Python</button>
+    <button class="filter-btn" onclick="filterProjects('c', this)">C Language</button>
+  </div>
+
+  <!-- Projects Grid -->
+  <div class="projects-grid" id="projectsGrid">
+
+    <div class="project-card" data-category="web">
+      <div class="card-banner" style="background: #ede9fe;">🌐</div>
+      <div class="card-body">
+        <span class="card-tag">Web</span>
+        <h3>Personal Website</h3>
+        <p>My first ever personal portfolio website made with simple HTML and CSS. No frameworks used!</p>
+        <a href="#" class="card-link">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="python">
+      <div class="card-banner" style="background: #fef3c7;">🐍</div>
+      <div class="card-body">
+        <span class="card-tag">Python</span>
+        <h3>Calculator App</h3>
+        <p>A command-line calculator that can do basic maths: add, subtract, multiply and divide.</p>
+        <a href="#" class="card-link">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="c">
+      <div class="card-banner" style="background: #d1fae5;">⚙️</div>
+      <div class="card-body">
+        <span class="card-tag">C Language</span>
+        <h3>Student Grade System</h3>
+        <p>A simple C program that takes student marks as input and calculates the grade and percentage.</p>
+        <a href="#" class="card-link">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="web">
+      <div class="card-banner" style="background: #fee2e2;">📝</div>
+      <div class="card-body">
+        <span class="card-tag">Web</span>
+        <h3>To-Do List Page</h3>
+        <p>A simple to-do list webpage where you can add and remove tasks using JavaScript.</p>
+        <a href="#" class="card-link">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="python">
+      <div class="card-banner" style="background: #e0f2fe;">🎲</div>
+      <div class="card-body">
+        <span class="card-tag">Python</span>
+        <h3>Number Guessing Game</h3>
+        <p>A fun Python game where the computer picks a random number and you have to guess it!</p>
+        <a href="#" class="card-link">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="c">
+      <div class="card-banner" style="background: #f3e8ff;">📊</div>
+      <div class="card-body">
+        <span class="card-tag">C Language</span>
+        <h3>Pattern Printing</h3>
+        <p>A collection of star and number patterns printed using nested loops — a classic beginner exercise.</p>
+        <a href="#" class="card-link">View Project</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CreatorHub &nbsp;|&nbsp; <a href="contact.html">Contact Me</a></p>
+  </footer>
+
+  <!-- JavaScript to filter project cards -->
+  <script>
+    // This function shows or hides cards based on the selected category
+    function filterProjects(category, clickedButton) {
+
+      // Step 1: Remove "active" class from all filter buttons
+      var allButtons = document.querySelectorAll('.filter-btn');
+      allButtons.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+
+      // Step 2: Add "active" class to the button that was clicked
+      clickedButton.classList.add('active');
+
+      // Step 3: Get all project cards
+      var allCards = document.querySelectorAll('.project-card');
+
+      // Step 4: Loop through each card and show/hide it
+      allCards.forEach(function(card) {
+        var cardCategory = card.getAttribute('data-category');
+
+        if (category === 'all' || cardCategory === category) {
+          // Show the card
+          card.classList.remove('hidden');
+        } else {
+          // Hide the card
+          card.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

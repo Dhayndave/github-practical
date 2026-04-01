@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorHub — Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7ff;
+      color: #222;
+    }
+
+    nav {
+      background: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo { font-size: 1.4rem; font-weight: 700; color: #4f46e5; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 24px; }
+    .nav-links a { text-decoration: none; color: #555; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #4f46e5; font-weight: 600; }
+
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 50px;
+    }
+
+    .page-header h1 { font-size: 2.2rem; font-weight: 700; }
+    .page-header p { opacity: 0.85; margin-top: 8px; font-size: 0.95rem; }
+
+    /* Blog List */
+    .blog-list {
+      max-width: 720px;
+      margin: 50px auto 60px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(79,70,229,0.13);
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .blog-tag {
+      background: #ede9fe;
+      color: #4f46e5;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .blog-date {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    .blog-card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .blog-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .read-more {
+      display: inline-block;
+      color: #4f46e5;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .read-more:hover {
+      border-bottom-color: #4f46e5;
+    }
+
+    /* Full Post Modal (popup) */
+    .modal-overlay {
+      display: none;             /* hidden by default */
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 16px;
+      padding: 36px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .modal-close:hover { color: #222; }
+
+    .modal-box h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #222;
+      padding-right: 30px;
+    }
+
+    .modal-box p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.85rem;
+    }
+
+    footer a { color: #4f46e5; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="logo">🎨 CreatorHub</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>My Blog</h1>
+    <p>Things I've learned and want to share</p>
+  </div>
+
+  <!-- Blog Posts -->
+  <div class="blog-list">
+
+    <div class="blog-card" onclick="openModal('modal1')">
+      <div class="blog-meta">
+        <span class="blog-tag">HTML & CSS</span>
+        <span class="blog-date">📅 March 10, 2025</span>
+      </div>
+      <h2>How I Made My First Website Using Just HTML and CSS</h2>
+      <p>When I started engineering I had zero idea how websites were built. Here's the simple story of how I made my very first webpage from scratch...</p>
+      <span class="read-more">Read More →</span>
+    </div>
+
+    <div class="blog-card" onclick="openModal('modal2')">
+      <div class="blog-meta">
+        <span class="blog-tag">Python</span>
+        <span class="blog-date">📅 February 28, 2025</span>
+      </div>
+      <h2>5 Simple Python Programs Every Beginner Should Try</h2>
+      <p>Python is the best language to start coding. These 5 small programs taught me more than 10 hours of video lectures...</p>
+      <span class="read-more">Read More →</span>
+    </div>
+
+    <div class="blog-card" onclick="openModal('modal3')">
+      <div class="blog-meta">
+        <span class="blog-tag">Tips</span>
+        <span class="blog-date">📅 February 10, 2025</span>
+      </div>
+      <h2>How I Study for Engineering Exams Without Getting Stressed</h2>
+      <p>First year engineering was tough. Here's my simple 3-step study method that actually helped me pass all my subjects...</p>
+      <span class="read-more">Read More →</span>
+    </div>
+
+    <div class="blog-card" onclick="openModal('modal4')">
+      <div class="blog-meta">
+        <span class="blog-tag">JavaScript</span>
+        <span class="blog-date">📅 January 20, 2025</span>
+      </div>
+      <h2>JavaScript in 10 Minutes — What I Wish Someone Had Told Me</h2>
+      <p>JavaScript was confusing at first. But once I understood variables, functions and events — everything clicked. Here's a quick intro...</p>
+      <span class="read-more">Read More →</span>
+    </div>
+
+  </div>
+
+  <!-- Modals (Popup Windows) -->
+
+  <div class="modal-overlay" id="modal1">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal1')">✕</button>
+      <h2>How I Made My First Website Using Just HTML and CSS</h2>
+      <p>When I joined engineering, I didn't know anything about websites. A senior told me to just open Notepad, type some HTML, and open it in Chrome. That one suggestion changed everything.</p>
+      <p>I started with a basic page: a heading, a paragraph, and a button. That was it. But seeing it work in my browser was the most exciting moment. From that day I kept adding more — colours, layouts, images.</p>
+      <p>The biggest lesson? You don't need any fancy software to build a website. Just a text editor and a browser is enough to get started.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal2">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal2')">✕</button>
+      <h2>5 Simple Python Programs Every Beginner Should Try</h2>
+      <p>1. <strong>Calculator</strong> — Learn how to take input and do arithmetic.</p>
+      <p>2. <strong>Guess the Number</strong> — Learn about loops and conditions (if/else).</p>
+      <p>3. <strong>Simple Quiz</strong> — Learn how to compare strings and keep score.</p>
+      <p>4. <strong>Word Counter</strong> — Learn about strings and split().</p>
+      <p>5. <strong>To-Do List in Terminal</strong> — Learn about lists and user input in a loop.</p>
+      <p>Each program teaches you one core concept. Build all five and you'll already be thinking like a programmer!</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal3">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal3')">✕</button>
+      <h2>How I Study for Engineering Exams Without Getting Stressed</h2>
+      <p><strong>Step 1: Read the syllabus first.</strong> Don't waste time studying topics that aren't in the exam. I always read the unit list before opening the textbook.</p>
+      <p><strong>Step 2: Use past papers.</strong> Solving previous year question papers is the single best way to prepare. The same type of questions keep coming back.</p>
+      <p><strong>Step 3: Teach someone.</strong> Explaining a topic to a friend forces you to truly understand it. If you can't explain it simply, you don't understand it yet.</p>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal4">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal4')">✕</button>
+      <h2>JavaScript in 10 Minutes</h2>
+      <p>JavaScript makes your webpage interactive. Here are the 3 things I wish someone had explained to me on day one:</p>
+      <p><strong>1. Variables</strong> — Use <code>var</code> or <code>let</code> to store data. Example: <code>var name = "Priya";</code></p>
+      <p><strong>2. Functions</strong> — A block of code you can run whenever you want. Example: <code>function sayHello() { alert("Hello!"); }</code></p>
+      <p><strong>3. Events</strong> — Things that happen when you click or type. Example: <code>onclick="sayHello()"</code> on a button.</p>
+      <p>That's really the core of JavaScript. Everything else builds on these three ideas!</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CreatorHub &nbsp;|&nbsp; <a href="contact.html">Contact Me</a></p>
+  </footer>
+
+  <!-- JavaScript for the modal popups -->
+  <script>
+    // This function opens a modal by adding the "open" class to it
+    function openModal(modalId) {
+      var modal = document.getElementById(modalId);
+      modal.classList.add('open');
+    }
+
+    // This function closes a modal by removing the "open" class
+    function closeModal(modalId) {
+      var modal = document.getElementById(modalId);
+      modal.classList.remove('open');
+    }
+
+    // Close any modal if the user clicks the dark background behind it
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+      overlay.addEventListener('click', function(event) {
+        // Only close if the user clicked the overlay itself (not the box inside)
+        if (event.target === overlay) {
+          overlay.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

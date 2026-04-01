@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorHub — My Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #4f46e5 100%);
+      min-height: 100vh;
+      color: #222;
+    }
+
+    /* Profile card in center */
+    .links-page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .profile-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .profile-bio {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    /* Each link button */
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      text-decoration: none;
+      color: #222;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    .link-icon {
+      font-size: 1.4rem;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .link-label {
+      flex: 1;
+      text-align: left;
+    }
+
+    .link-arrow {
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    /* Visit Counter */
+    .visit-counter {
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 30px;
+      color: white;
+    }
+
+    .visit-counter p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .visit-counter span {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="links-page">
+
+    <!-- Profile -->
+    <div class="profile-avatar">👩‍💻</div>
+    <div class="profile-name">Priya Sharma</div>
+    <div class="profile-bio">First Year Engineering Student 🎓<br>Learning to code, one project at a time.</div>
+
+    <!-- Links -->
+    <a href="portfolio.html" class="link-btn">
+      <div class="link-icon">🖼️</div>
+      <div class="link-label">My Portfolio</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="blog.html" class="link-btn">
+      <div class="link-icon">✍️</div>
+      <div class="link-label">My Blog</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://github.com" target="_blank" class="link-btn">
+      <div class="link-icon">🐙</div>
+      <div class="link-label">GitHub Profile</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://linkedin.com" target="_blank" class="link-btn">
+      <div class="link-icon">💼</div>
+      <div class="link-label">LinkedIn</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://instagram.com" target="_blank" class="link-btn">
+      <div class="link-icon">📸</div>
+      <div class="link-label">Instagram</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="https://twitter.com" target="_blank" class="link-btn">
+      <div class="link-icon">🐦</div>
+      <div class="link-label">Twitter / X</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <a href="contact.html" class="link-btn">
+      <div class="link-icon">📬</div>
+      <div class="link-label">Contact Me</div>
+      <div class="link-arrow">→</div>
+    </a>
+
+    <!-- Visit Counter using localStorage -->
+    <div class="visit-counter">
+      <span id="visitCount">0</span>
+      <p>times this page has been visited on your browser</p>
+    </div>
+
+    <div class="footer-note">© 2025 Priya Sharma · CreatorHub</div>
+  </div>
+
+  <!-- JavaScript to count page visits using localStorage -->
+  <script>
+    // localStorage lets us save small data in the browser
+
+    // Step 1: Get the current count from localStorage
+    // If it doesn't exist yet, use 0 as the starting value
+    var count = localStorage.getItem('visitCount');
+
+    if (count === null) {
+      // First visit ever — start at 1
+      count = 1;
+    } else {
+      // Not the first visit — add 1 to the existing count
+      count = parseInt(count) + 1;
+    }
+
+    // Step 2: Save the new count back to localStorage
+    localStorage.setItem('visitCount', count);
+
+    // Step 3: Show the count on the page
+    document.getElementById('visitCount').textContent = count;
+  </script>
+
+</body>
+</html>

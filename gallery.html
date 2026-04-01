@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorHub — Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7ff;
+      color: #222;
+    }
+
+    nav {
+      background: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo { font-size: 1.4rem; font-weight: 700; color: #4f46e5; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 24px; }
+    .nav-links a { text-decoration: none; color: #555; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #4f46e5; font-weight: 600; }
+
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      text-align: center;
+      padding: 60px 20px 50px;
+    }
+
+    .page-header h1 { font-size: 2.2rem; font-weight: 700; }
+    .page-header p { opacity: 0.85; margin-top: 8px; font-size: 0.95rem; }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      max-width: 1000px;
+      margin: 50px auto 60px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    /* Each gallery item */
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: white;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(79,70,229,0.15);
+    }
+
+    /* Coloured placeholder instead of real images */
+    .gallery-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    .gallery-caption {
+      padding: 12px 14px;
+    }
+
+    .gallery-caption h3 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 3px;
+    }
+
+    .gallery-caption p {
+      font-size: 0.78rem;
+      color: #888;
+    }
+
+    /* Lightbox (image popup) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-box {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .lightbox-emoji {
+      font-size: 6rem;
+      margin-bottom: 16px;
+    }
+
+    .lightbox-box h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .lightbox-box p {
+      font-size: 0.88rem;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .lightbox-close {
+      padding: 10px 28px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover { background: #3730a3; }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.85rem;
+    }
+
+    footer a { color: #4f46e5; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="logo">🎨 CreatorHub</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>My Gallery</h1>
+    <p>A collection of my work, designs and moments</p>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div class="gallery-grid">
+
+    <div class="gallery-item" onclick="openLightbox('🌐', 'My First Webpage', 'A simple HTML page I built in my first week of learning web development.')">
+      <div class="gallery-thumb" style="background: #ede9fe;">🌐</div>
+      <div class="gallery-caption">
+        <h3>My First Webpage</h3>
+        <p>HTML & CSS</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('🐍', 'Python Calculator', 'A command-line calculator I wrote as my first Python project.')">
+      <div class="gallery-thumb" style="background: #fef3c7;">🐍</div>
+      <div class="gallery-caption">
+        <h3>Python Calculator</h3>
+        <p>Python Project</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('📸', 'Campus Photo', 'A photo I took on my first day at college.')">
+      <div class="gallery-thumb" style="background: #d1fae5;">📸</div>
+      <div class="gallery-caption">
+        <h3>Campus Photo</h3>
+        <p>Photography</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('🎨', 'Colour Poster', 'A simple graphic design I made using Canva.')">
+      <div class="gallery-thumb" style="background: #fee2e2;">🎨</div>
+      <div class="gallery-caption">
+        <h3>Colour Poster</h3>
+        <p>Design</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('📝', 'Notes Layout', 'My handwritten notes organised neatly for the semester exam.')">
+      <div class="gallery-thumb" style="background: #e0f2fe;">📝</div>
+      <div class="gallery-caption">
+        <h3>Study Notes</h3>
+        <p>Organisation</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('🖥️', 'Code Screenshot', 'A screenshot of my C program running in the terminal for the first time.')">
+      <div class="gallery-thumb" style="background: #f3e8ff;">🖥️</div>
+      <div class="gallery-caption">
+        <h3>Code Screenshot</h3>
+        <p>C Programming</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('🌸', 'Nature Shot', 'A photo from our college campus garden.')">
+      <div class="gallery-thumb" style="background: #fce7f3;">🌸</div>
+      <div class="gallery-caption">
+        <h3>Nature Shot</h3>
+        <p>Photography</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox('🎲', 'Guessing Game', 'Screenshot of my number guessing game project in Python.')">
+      <div class="gallery-thumb" style="background: #ecfdf5;">🎲</div>
+      <div class="gallery-caption">
+        <h3>Guessing Game</h3>
+        <p>Python Project</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox Popup -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBackground(event)">
+    <div class="lightbox-box">
+      <div class="lightbox-emoji" id="lbEmoji">🖼️</div>
+      <h3 id="lbTitle">Title</h3>
+      <p id="lbDesc">Description goes here.</p>
+      <button class="lightbox-close" onclick="closeLightbox()">Close ✕</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CreatorHub &nbsp;|&nbsp; <a href="contact.html">Contact Me</a></p>
+  </footer>
+
+  <!-- JavaScript for the lightbox (click to zoom popup) -->
+  <script>
+    // Open the lightbox with the given content
+    function openLightbox(emoji, title, description) {
+      // Put the content into the lightbox
+      document.getElementById('lbEmoji').textContent = emoji;
+      document.getElementById('lbTitle').textContent = title;
+      document.getElementById('lbDesc').textContent  = description;
+
+      // Show the lightbox
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    // Close the lightbox
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    // Close if user clicks the dark background (not the box itself)
+    function closeLightboxOnBackground(event) {
+      if (event.target.id === 'lightbox') {
+        closeLightbox();
+      }
+    }
+  </script>
+
+</body>
+</html>

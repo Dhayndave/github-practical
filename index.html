@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CreatorHub — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ── Reset ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7ff;
+      color: #222;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #555;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #4f46e5;
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn-white {
+      background: white;
+      color: #4f46e5;
+      border: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 12px;
+    }
+
+    /* ── Stats Row ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      background: white;
+      padding: 36px 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .stat-item .label {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* ── Features Section ── */
+    .features {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #777;
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(79,70,229,0.12);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      margin: 40px 0 0;
+    }
+
+    .cta-banner h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-banner p {
+      opacity: 0.85;
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+      .stats { gap: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="logo">🎨 CreatorHub</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Build Your <br>Digital Identity</h1>
+    <p>A simple platform for creators, students and beginners to share their work and grow online.</p>
+    <a href="portfolio.html" class="btn btn-white">View Portfolio</a>
+    <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-item">
+      <div class="number" id="stat1">0</div>
+      <div class="label">Projects Done</div>
+    </div>
+    <div class="stat-item">
+      <div class="number" id="stat2">0</div>
+      <div class="label">Happy Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="number" id="stat3">0</div>
+      <div class="label">Creators Joined</div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section class="features">
+    <h2 class="section-title">What We Offer</h2>
+    <p class="section-sub">Simple tools to help you get started as a creator</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🖼️</div>
+        <h3>Portfolio Page</h3>
+        <p>Show off your projects and work in a clean, simple layout that anyone can understand.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✍️</div>
+        <h3>Blog Section</h3>
+        <p>Write about your learning journey, tips and thoughts. Share your ideas with the world.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <h3>Gallery</h3>
+        <p>Upload and display your photos, designs or artwork in a beautiful gallery layout.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h3>Testimonials</h3>
+        <p>Collect reviews and feedback from teachers, friends or clients to build trust.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <h3>Links Page</h3>
+        <p>Share all your social media, GitHub and other important links in one place.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📬</div>
+        <h3>Contact Form</h3>
+        <p>Let people easily reach you with a simple contact form on your page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <h2>Ready to Start?</h2>
+    <p>Explore all the pages and make this website your own!</p>
+    <a href="about.html" class="btn btn-white">Learn More About Me</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CreatorHub &nbsp;|&nbsp;
+      <a href="links.html">All Links</a> &nbsp;|&nbsp;
+      <a href="contact.html">Contact</a>
+    </p>
+  </footer>
+
+  <!-- Simple JavaScript to count up numbers -->
+  <script>
+    // This function counts a number from 0 to the target value
+    function countUp(elementId, targetNumber, duration) {
+      var element = document.getElementById(elementId);
+      var start = 0;
+      var step = targetNumber / (duration / 20); // how much to add each step
+
+      var timer = setInterval(function() {
+        start += step;
+        if (start >= targetNumber) {
+          element.textContent = targetNumber + "+";
+          clearInterval(timer); // stop the timer when done
+        } else {
+          element.textContent = Math.floor(start);
+        }
+      }, 20);
+    }
+
+    // Start counting when the page loads
+    window.onload = function() {
+      countUp("stat1", 50, 1500);
+      countUp("stat2", 30, 1500);
+      countUp("stat3", 200, 1500);
+    };
+  </script>
+
+</body>
+</html>
